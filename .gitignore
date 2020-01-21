@@ -2,6 +2,7 @@
 #---------------------------
 config.php
 exec.log
+time.log
 !.gitkeep
 
 # Temporary Files

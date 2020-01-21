@@ -93,13 +93,13 @@
 
 		// ツイートの内容
 		$tweet_text = '🗓'.date('Y年m月d日').'の朝です。おはようございます。'."\n".
-					  '東京の天気は'.$telop.'、最高気温は🌡️'.$weather['forecasts'][0]['temperature']['max']['celsius'].'℃です。'."\n".
+					  '東京の天気は'.$telop.'、最高気温は🌡️'.@$weather['forecasts'][0]['temperature']['max']['celsius'].'℃です。'."\n".
 					  '今日も #本田とじゃんけん か #本田とカードバトル 、やりませんか？'."\n".
 					  'そしたら今回も、俺が勝ちますよ。'."\n".
 					  '運も実力のうち。ほな、いただきます。'."\n";
 
 		// 画像を送る
-		$media = $connection->video('media/video', ['media' => dirname(__FILE__).'/video/honda_pepsi.jpg', 'media_type' => 'image/jpeg'], true);
+		$media = $connection->upload('media/upload', ['media' => dirname(__FILE__).'/video/honda_pepsi.jpg', 'media_type' => 'image/jpeg'], true);
 
 		// ツイートを送る
 		$tweet = $connection->post('statuses/update', array(
