@@ -117,7 +117,7 @@
 						// 負けた場合
 						case 'YOU LOSE':
 
-							echo '    #本田にグーで勝つ：残念、本田圭佑の勝利！'."\n\n";
+							echo '    #本田にグーで勝つ: 残念、本田圭佑の勝利！'."\n\n";
 
 							// アップロードする動画
 							$video = dirname(__FILE__).'/video/honda_lost_3.mp4';
@@ -135,7 +135,7 @@
 						// 買った場合
 						case 'YOU WIN':
 
-							echo '    #本田にグーで勝つ：お見事！あなたの勝利！'."\n\n";
+							echo '    #本田にグーで勝つ: お見事！あなたの勝利！'."\n\n";
 
 							// アップロードする動画
 							$video = dirname(__FILE__).'/video/honda_win_2.mp4';
@@ -161,7 +161,7 @@
 						// 負けた場合
 						case 'YOU LOSE':
 
-							echo '    #本田にチョキで勝つ：残念、本田圭佑の勝利！'."\n\n";
+							echo '    #本田にチョキで勝つ: 残念、本田圭佑の勝利！'."\n\n";
 
 							// アップロードする動画
 							$video = dirname(__FILE__).'/video/honda_lost_1.mp4';
@@ -180,7 +180,7 @@
 						// 買った場合
 						case 'YOU WIN':
 
-							echo '    #本田にチョキで勝つ：お見事！あなたの勝利！'."\n\n";
+							echo '    #本田にチョキで勝つ: お見事！あなたの勝利！'."\n\n";
 
 							// アップロードする動画
 							$video = dirname(__FILE__).'/video/honda_win_3.mp4';
@@ -206,7 +206,7 @@
 						// 負けた場合
 						case 'YOU LOSE':
 
-							echo '    #本田にパーで勝つ：残念、本田圭佑の勝利！'."\n\n";
+							echo '    #本田にパーで勝つ: 残念、本田圭佑の勝利！'."\n\n";
 
 							// アップロードする動画
 							$video = dirname(__FILE__).'/video/honda_lost_2.mp4';
@@ -224,7 +224,7 @@
 						// 買った場合
 						case 'YOU WIN':
 
-							echo '    #本田にパーで勝つ：お見事！あなたの勝利！'."\n\n";
+							echo '    #本田にパーで勝つ: お見事！あなたの勝利！'."\n\n";
 
 							// アップロードする動画
 							$video = dirname(__FILE__).'/video/honda_win_1.mp4';
@@ -253,7 +253,7 @@
 							// パターンをランダムで選ぶ
 							$you_lose = rand(1, 4); // 1～4の乱数を取得
 
-							echo '    #私は本田のAを引く：残念、本田圭佑の勝利！'."\n\n";
+							echo '    #私は本田のAを引く: 残念、本田圭佑の勝利！'."\n\n";
 
 							// アップロードする動画
 							$video = dirname(__FILE__).'/video/honda_card_lost_A'.$you_lose.'.mp4';
@@ -317,7 +317,7 @@
 
 						case 'YOU WIN':
 
-							echo '    #私は本田のAを引く：お見事！あなたの勝利！'."\n\n";
+							echo '    #私は本田のAを引く: お見事！あなたの勝利！'."\n\n";
 
 							// アップロードする動画
 							$video = dirname(__FILE__).'/video/honda_card_win_A.mp4';
@@ -346,7 +346,7 @@
 							// パターンをランダムで選ぶ
 							$you_lose = rand(1, 3); // 1～3の乱数を取得
 
-							echo '    #私は本田のBを引く：残念、本田圭佑の勝利！'."\n\n";
+							echo '    #私は本田のBを引く: 残念、本田圭佑の勝利！'."\n\n";
 
 							// アップロードする動画
 							$video = dirname(__FILE__).'/video/honda_card_lost_B'.$you_lose.'.mp4';
@@ -397,7 +397,7 @@
 
 						case 'YOU WIN':
 
-							echo '    #私は本田のBを引く：お見事！あなたの勝利！'."\n\n";
+							echo '    #私は本田のBを引く: お見事！あなたの勝利！'."\n\n";
 
 							// アップロードする動画
 							$video = dirname(__FILE__).'/video/honda_card_win_B.mp4';
@@ -484,7 +484,7 @@
 					// リプライの内容
 					$reply = '勝率は本家よりも高めの10%ですが、ツイートに #本田優しくして とつけると勝率が40%に、#本田大好き とつけると勝率が70%に上がります。'."\n\n"
 							.'どうしても勝てない時、試しといてください。'."\n"
-							.'ほな、（勝利）いただきます😁'."\n\n";
+							.'ほな、(勝利) いただきます😁'."\n\n";
 					
 					$reply_array = array(
 						'status' => $reply,
@@ -496,13 +496,13 @@
 
 				}
 
-			} else if ($res[$i]->user->screen_name == $screen_name){
-
-				echo '    '.($i+1).'番目のツイート: 自分からのリプライのため、スキップします。'."\n\n";
-
 			} else if ($tweet_timestamp < $last_timestamp){
 
 				echo '    '.($i+1).'番目のツイート: 前回の実行時刻よりも前にツイートされているため、スキップします。'."\n\n";
+
+			} else if ($res[$i]->user->screen_name == $screen_name){
+
+				echo '    '.($i+1).'番目のツイート: 自分からのリプライのため、スキップします。'."\n\n";
 
 			}
 	
