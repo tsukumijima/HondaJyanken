@@ -87,8 +87,8 @@
 			echo '    ツイート投稿日時: '.date('Y-m-d H:i:s', $tweet_timestamp).' ツイートのタイムスタンプ: '.$tweet_timestamp."\n";
 			echo '    ツイートのURL: https://twitter.com/i/status/'.$res[$i]->id."\n\n";
 
-			// 自分からのリプライではない & ツイート投稿時刻が前回の実行時刻よりも後なら
-			if ($res[$i]->user->screen_name !== $screen_name and $tweet_timestamp >= $last_timestamp){
+			// 自分からのリプライではない & pepsi_jpn を除外 & ツイート投稿時刻が前回の実行時刻よりも後なら
+			if ($res[$i]->user->screen_name !== $screen_name and $res[$i]->user->screen_name !== 'pepsi_jpn' and $tweet_timestamp >= $last_timestamp){
 
 				// #本田優しくして
 				if (strpos($res[$i]->text, '#本田優しくして') !== false){
@@ -444,7 +444,10 @@
 					);
 
 				// 有効なコマンドが含まれていなかったときはヘルプを送信する
-				} else if (strpos($res[$i]->text, 'じゃあ、また今度') === false){
+				// その他のリプライ全てに返信すると過剰なので # と 本田 が含まれる場合に限る
+				} else if (strpos($res[$i]->text, '#') !== false and
+						   strpos($res[$i]->text, '本田') !== false and
+						   strpos($res[$i]->text, 'じゃあ、また今度') === false){
 
 					echo '    コマンドが指定されていないため、ヘルプを送信します。'."\n\n";
 
