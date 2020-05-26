@@ -99,7 +99,7 @@
 					  '運も実力のうち。ほな、いただきます。'."\n";
 
 		// 画像を送る
-		$media = $connection->upload('media/upload', ['media' => dirname(__FILE__).'/video/honda_pepsi.jpg', 'media_type' => 'image/jpeg'], true);
+		$media = $connection->upload('media/upload', ['media' => dirname(__FILE__).'/image/honda_pepsi.jpg', 'media_type' => 'image/jpeg'], true);
 
 		// ツイートを送る
 		$tweet = $connection->post('statuses/update', array(
@@ -122,5 +122,5 @@
 		echo '実行を完了しました。'."\n\n";
 
 	} else { //セッションがない場合
-		echo 'ツイートさせるにはアクセストークンを設定してください。';
+		echo 'ツイートする場合はアクセストークンを設定してください。';
 	}

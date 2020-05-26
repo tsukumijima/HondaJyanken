@@ -20,7 +20,7 @@
 	if (isset($OAUTH_TOKEN) and isset($OAUTH_TOKEN_SECRET)){
 
 		// ヘッダを設定
-		header('content-type: application/json; charset=utf-8');
+		// header('content-type: application/json; charset=utf-8');
 
 		// 日時関連
 		$timestamp = microtime(true); // 現在時刻のタイムスタンプ
@@ -78,6 +78,7 @@
 		echo '    リプライへの返信を開始します。'."\n\n";
 		echo '  -------------------------------------------------------'."\n\n";
 
+
 		// ツイートを取り出す
 		for ($i = 0; $i < count($res); $i++) {
 
@@ -85,31 +86,32 @@
 			$tweet_timestamp = strtotime($res[$i]->created_at); // ツイート投稿時刻のタイムスタンプが手に入る
 
 			echo '    ツイート投稿日時: '.date('Y-m-d H:i:s', $tweet_timestamp).' ツイートのタイムスタンプ: '.$tweet_timestamp."\n";
-			echo '    ツイートのURL: https://twitter.com/i/status/'.$res[$i]->id."\n\n";
+			echo '    ツイートの URL: https://twitter.com/i/status/'.$res[$i]->id."\n\n";
 
 			// 自分からのリプライではない & pepsi_jpn を除外 & ツイート投稿時刻が前回の実行時刻よりも後なら
-			if ($res[$i]->user->screen_name !== $screen_name and $res[$i]->user->screen_name !== 'pepsi_jpn' and $tweet_timestamp >= $last_timestamp){
+			if ($res[$i]->user->screen_name !== $screen_name and
+				$res[$i]->user->screen_name !== 'pepsi_jpn' and
+				$tweet_timestamp >= $last_timestamp){
 
 				// #本田優しくして
 				if (strpos($res[$i]->text, '#本田優しくして') !== false){
-					$percent = 40;
+					$percent = 40; // 勝率を 40% に
 				}
 				// #本田大好き
 				if (strpos($res[$i]->text, '#本田大好き') !== false){
-					$percent = 70;
+					$percent = 70; // 勝率を 70% に
 				}
 
 				// 勝敗を決める
 				$random = rand(1, 100); // 1～100の乱数を取得
-
-				if ($random < $percent){ // 1～指定確率の間なら
-					$jyanken = 'YOU WIN';
+				if ($random < $percent){ // 1～指定勝率の間なら
+					$jyanken = 'YOU WIN'; // 勝った
 				} else {
-					$jyanken = 'YOU LOSE';
+					$jyanken = 'YOU LOSE'; // 負けた
 				}
 
 				// 取得したツイートに #本田にグーで勝つ が含まれていたら
-				if (strpos($res[$i]->text, 'グー') !== false){
+				if (strpos($res[$i]->text, '#本田にグーで勝つ') !== false){
 
 					// 勝敗判定
 					switch($jyanken) {
@@ -120,7 +122,7 @@
 							echo '    #本田にグーで勝つ: 残念、本田圭佑の勝利！'."\n\n";
 
 							// アップロードする動画
-							$video = dirname(__FILE__).'/video/honda_lost_3.mp4';
+							$video = dirname(__FILE__).'/video/honda_lose_Paper.mp4';
 
 							// リプライの内容
 							$reply = '残念、本田圭佑の勝利！'."\n\n"
@@ -138,7 +140,7 @@
 							echo '    #本田にグーで勝つ: お見事！あなたの勝利！'."\n\n";
 
 							// アップロードする動画
-							$video = dirname(__FILE__).'/video/honda_win_2.mp4';
+							$video = dirname(__FILE__).'/video/honda_win_Scissor.mp4';
 
 							// リプライの内容
 							$reply = 'お見事！あなたの勝利！'."\n\n"
@@ -153,7 +155,7 @@
 				}
 
 				// 取得したツイートに #本田にチョキで勝つ が含まれていたら
-				if (strpos($res[$i]->text, 'チョキ') !== false){
+				if (strpos($res[$i]->text, '#本田にチョキで勝つ') !== false){
 
 					// 勝敗判定
 					switch($jyanken) {
@@ -164,7 +166,7 @@
 							echo '    #本田にチョキで勝つ: 残念、本田圭佑の勝利！'."\n\n";
 
 							// アップロードする動画
-							$video = dirname(__FILE__).'/video/honda_lost_1.mp4';
+							$video = dirname(__FILE__).'/video/honda_lose_Rock.mp4';
 
 							// リプライの内容
 							$reply = '残念、本田圭佑の勝利！'."\n\n"
@@ -183,7 +185,7 @@
 							echo '    #本田にチョキで勝つ: お見事！あなたの勝利！'."\n\n";
 
 							// アップロードする動画
-							$video = dirname(__FILE__).'/video/honda_win_3.mp4';
+							$video = dirname(__FILE__).'/video/honda_win_Paper.mp4';
 
 							// リプライの内容
 							$reply = 'お見事！あなたの勝利！'."\n\n"
@@ -198,7 +200,7 @@
 				}
 
 				// 取得したツイートに #本田にパーで勝つ が含まれていたら
-				if (strpos($res[$i]->text, 'パー') !== false){
+				if (strpos($res[$i]->text, '#本田にパーで勝つ') !== false){
 
 					// 勝敗判定
 					switch($jyanken) {
@@ -209,7 +211,7 @@
 							echo '    #本田にパーで勝つ: 残念、本田圭佑の勝利！'."\n\n";
 
 							// アップロードする動画
-							$video = dirname(__FILE__).'/video/honda_lost_2.mp4';
+							$video = dirname(__FILE__).'/video/honda_lose_Scissor.mp4';
 
 							// リプライの内容
 							$reply = '残念、本田圭佑の勝利！'."\n\n"
@@ -227,7 +229,7 @@
 							echo '    #本田にパーで勝つ: お見事！あなたの勝利！'."\n\n";
 
 							// アップロードする動画
-							$video = dirname(__FILE__).'/video/honda_win_1.mp4';
+							$video = dirname(__FILE__).'/video/honda_win_Rock.mp4';
 
 							// リプライの内容
 							$reply = 'お見事！あなたの勝利！'."\n\n"
@@ -243,7 +245,7 @@
 
 				
 				// 取得したツイートに #私は本田のAを引く が含まれていたら
-				if (strpos($res[$i]->text, 'Aを引く') !== false){
+				if (strpos($res[$i]->text, '#私は本田のAを引く') !== false){
 
 					// 勝敗判定
 					switch($jyanken) {
@@ -251,12 +253,12 @@
 						case 'YOU LOSE':
 
 							// パターンをランダムで選ぶ
-							$you_lose = rand(1, 4); // 1～4の乱数を取得
+							$you_lose = rand(1, 3); // 1～3の乱数を取得
 
 							echo '    #私は本田のAを引く: 残念、本田圭佑の勝利！'."\n\n";
 
 							// アップロードする動画
-							$video = dirname(__FILE__).'/video/honda_card_lost_A'.$you_lose.'.mp4';
+							$video = dirname(__FILE__).'/video/honda_card_lose_A'.$you_lose.'.mp4';
 
 							// パターンによって文言を変える
 							switch($you_lose) {
@@ -336,7 +338,7 @@
 				}
 
 				// 取得したツイートに #私は本田のBを引く が含まれていたら
-				if (strpos($res[$i]->text, 'Bを引く') !== false){
+				if (strpos($res[$i]->text, '#私は本田のBを引く') !== false){
 
 					// 勝敗判定
 					switch($jyanken) {
@@ -349,7 +351,7 @@
 							echo '    #私は本田のBを引く: 残念、本田圭佑の勝利！'."\n\n";
 
 							// アップロードする動画
-							$video = dirname(__FILE__).'/video/honda_card_lost_B'.$you_lose.'.mp4';
+							$video = dirname(__FILE__).'/video/honda_card_lose_B'.$you_lose.'.mp4';
 
 							// パターンによって文言を変える
 							switch($you_lose) {
@@ -415,7 +417,7 @@
 					}
 				}
 
-				// video が NULL でないなら
+				// $video が空でないなら続行
 				if (isset($video)){
 
 					// Twitterに動画をアップロード
@@ -517,6 +519,6 @@
 		echo '  -------------------------------------------------------'."\n\n";
 
 	} else { //セッションがない場合
-		echo 'ツイートさせるにはアクセストークンを設定してください。';
+		echo 'ツイートする場合はアクセストークンを設定してください。';
 	}
 

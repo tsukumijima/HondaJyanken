@@ -5,12 +5,7 @@
 // スクリーンネーム (@から始まるID)
 $screen_name = 'HondaJyanken';
 
-// HTMLから参照する実行ログのファイル名
-// ログは別途 Cron に */1 * * * * php /root/HondaJyanken/tweet.php > /root/HondaJyanken/exec.log 2>&1
-// のように設定して予め吐き出すようにする(Cronにはフルパスで設定)
-$logfile = 'exec.log';
-
-// 前回の実行時間を記録するファイルのファイル名
+// 前回の実行時間を記録するログのファイル名
 $timefile = 'time.log';
 
 // バージョン
