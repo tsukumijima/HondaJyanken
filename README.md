@@ -26,8 +26,9 @@ Bot 制作に役立てるなりご自由に
 1. お使いの PC or サーバーに PHP が入っていない場合は適宜インストールする
 2. config.default.php を config.php にコピーする
 3. Twitter API のコンシューマーキー・アクセストークンなどを config.php に設定する
-4. Cron に `*/1 * * * * php /root/HondaJyanken/tweet.php > /root/HondaJyanken/exec.log 2>&1` のように登録する
-5. 自動ツイートをしたければ Cron に ``0 8 * * * php /root/HondaJyanken/tweet_auto.php > /root/HondaJyanken/exec.log 2>&1` のように登録する
+4. Cron に `*/1 * * * * php /root/HondaJyanken/tweet.php >> /root/HondaJyanken/exec.log 2>&1` のように登録する
+   - ログは追記したほうが不具合確認がしやすいがずっと消さないと肥大化するので定期的に消すこと
+5. 自動ツイートをしたければ Cron に ``0 8 * * * php /root/HondaJyanken/tweet_auto.php` のように登録する
 6. 後は Cron が自動で1秒ごとに Bot を叩いてくれるはず
    - 動かない場合はコンシューマーキー・アクセストークンが合っているかどうかや出力されたログを確認すること
 

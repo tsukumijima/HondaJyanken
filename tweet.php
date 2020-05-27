@@ -108,7 +108,7 @@
             }
 
             // リプライを取得
-            $tweets = $this->connection->get('statuses/mentions_timeline', array('count' => $this->config['tweet_acquisition']));
+            $tweets = $this->connection->get('statuses/mentions_timeline', array('count' => $this->config['tweet_acquisition'], 'tweet_mode' => 'extended'));
             
             echo '    直近 '.(count($tweets)).' 件のツイートを取得しました。'."\n\n";
             echo '    リプライへの返信を開始します。'."\n\n";
@@ -130,12 +130,12 @@
                 // ツイート投稿時刻が前回の実行時刻よりも後
                 if ($tweet->user->screen_name !== $this->config['screen_name'] and
                     $tweet->user->screen_name !== 'pepsi_jpn' and
-                    $timestamp_tweet >= $timestamp_last) {
+                    $timestamp_tweet >= floor($timestamp_last)) { // 小数点以下は切り捨ててから比較する
 
 
                     // 勝率を設定
                     // #本田優しくして … 40%・#本田大好き … 70%
-                    $this->setPercentage($tweet->text);
+                    $this->setPercentage($tweet->full_text);
 
                     // 勝敗を決める
                     $random = rand(1, 100); // 1～100の乱数を取得
@@ -148,7 +148,7 @@
                     }
 
                     // ツイートする動画と文章を選択
-                    $select = $this->selectTweet($tweet->text);
+                    $select = $this->selectTweet($tweet->full_text);
 
                     // 正常に選択できていれば
                     if (is_array($select)) {
@@ -619,6 +619,11 @@
                     }
                 }
             }
+
+            var_dump($text);
+            var_dump($battle_type);
+            var_dump($command);
+            var_dump($result);
             
             // どれにも当てはまらなかったらヘルプを送信する
             if (!isset($result)) {
@@ -737,7 +742,7 @@
 
             // 動画が使えるようになるまで数秒待つ
             // これをやらないと (code: 324): Not valid video が発生する
-            sleep(2);
+            sleep(3);
 
             // リプライするツイートをファボる
             $this->connection->post('favorites/create', array('id' => $tweet_id));
