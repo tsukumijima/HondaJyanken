@@ -10,10 +10,10 @@
 	require (dirname(__FILE__).'/config.php');
 
 	// アクセストークンがあれば
-	if (isset($OAUTH_TOKEN) and isset($OAUTH_TOKEN_SECRET)){
+	if (isset($config['OAUTH_TOKEN']) and isset($config['OAUTH_TOKEN_SECRET'])){
 
 		// Twitterに接続
-		$connection = new TwitterOAuth($CONSUMER_KEY, $CONSUMER_SECRET, $OAUTH_TOKEN, $OAUTH_TOKEN_SECRET);
+		$connection = new TwitterOAuth($config['CONSUMER_KEY'], $config['CONSUMER_SECRET'], $config['OAUTH_TOKEN'], $config['OAUTH_TOKEN_SECRET']);
 
 		// 天気予報APIを叩く
 		$weather = json_decode(file_get_contents('http://weather.livedoor.com/forecast/webservice/json/v1?city=130010'), true);
