@@ -10,7 +10,7 @@ Bot 制作に役立てるなりご自由に
 
 - README.md … この説明書
 - config.default.php … 設定ファイル
-  - 手動で config.php にコピーしてください
+  - 手動で config.php にコピー後 UTF-8・LF で保存できるエディタで編集する
 - 334.php … 334用
 - tweet.php … Bot 本体
   - このファイルを Cron で定期的に叩くことで Bot を実行する
@@ -19,6 +19,7 @@ Bot 制作に役立てるなりご自由に
 - tweet_cmd.php … コマンドからツイートを投稿する用
   - `php /root/HondaJyanken/tweet_auto.php "おはようございます"` とコマンドを実行するとツイートされる
 - twitteroauth/ … Twitter API 操作用ライブラリ
+- image/ … 投稿する画像
 - video/ … 投稿する動画
 
 ## 使い方
@@ -30,7 +31,7 @@ Bot 制作に役立てるなりご自由に
    - ログは追記したほうが不具合確認がしやすいがずっと消さないと肥大化するので定期的に消すこと
 5. 自動ツイートをしたければ Cron に ``0 8 * * * php /root/HondaJyanken/tweet_auto.php` のように登録する
 6. 後は Cron が自動で1秒ごとに Bot を叩いてくれるはず
-   - 動かない場合はコンシューマーキー・アクセストークンが合っているかどうかや出力されたログを確認すること
+   - 動かない場合はコンシューマーキー・アクセストークンが合っているかどうかや出力されたログを確認する
 
 ## License
 [MIT Licence](LICENSE.txt)

@@ -15,7 +15,7 @@ $config['percentage'] = 10;
 $config['tweet_acquisition'] = 10;
 
 // バージョン
-$config['version'] = 'v4.0';
+$config['version'] = 'v4.1';
 
 
 // ***** Twitter API 設定 ****

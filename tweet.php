@@ -619,11 +619,6 @@
                     }
                 }
             }
-
-            var_dump($text);
-            var_dump($battle_type);
-            var_dump($command);
-            var_dump($result);
             
             // どれにも当てはまらなかったらヘルプを送信する
             if (!isset($result)) {
