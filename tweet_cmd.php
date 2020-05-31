@@ -9,10 +9,11 @@
 	// 設定読み込み
 	require (dirname(__FILE__).'/config.php');
 
-	if (isset($OAUTH_TOKEN) and isset($OAUTH_TOKEN_SECRET)){ //アクセストークンがあれば
+	// アクセストークンがあれば
+	if (isset($config['OAUTH_TOKEN']) and isset($config['OAUTH_TOKEN_SECRET'])){
 
 		// Twitterに接続
-		$connection = new TwitterOAuth($CONSUMER_KEY, $CONSUMER_SECRET, $OAUTH_TOKEN, $OAUTH_TOKEN_SECRET);
+		$connection = new TwitterOAuth($config['CONSUMER_KEY'], $config['CONSUMER_SECRET'], $config['OAUTH_TOKEN'], $config['OAUTH_TOKEN_SECRET']);
 
 		// ツイートの内容
 		$tweet_text = $argv[1];
