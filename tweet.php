@@ -486,7 +486,10 @@
 
 
             // 本田とじゃんけん & 本田とじゃんけん2020
-            if (strpos($text, '#本田とじゃんけん') !== false) {
+            if (strpos($text, '#本田とじゃんけん') !== false or
+                strpos($text, '#本田にグーで勝つ') !== false or
+                strpos($text, '#本田にチョキで勝つ') !== false or
+                strpos($text, '#本田にパーで勝つ') !== false) {
 
                 // 本田とじゃんけん2020
                 if (strpos($text, '#本田とじゃんけん2020') !== false) {
@@ -556,7 +559,9 @@
                 }
 
             // 本田とカードバトル
-            } else if (strpos($text, '#本田とカードバトル') !== false) {
+            } else if (strpos($text, '#本田とカードバトル') !== false or
+                       strpos($text, '#私は本田のAを引く') !== false or
+                       strpos($text, '#私は本田のBを引く') !== false) {
 
                 // 種類
                 $battle_type = 'CardBattle';
@@ -579,7 +584,9 @@
                 }
 
             // 本田とコイントス
-            } else if (strpos($text, '#本田とコイントス') !== false) {
+            } else if (strpos($text, '#本田とコイントス') !== false or
+                       strpos($text, '#私はHのコインを選ぶ') !== false or
+                       strpos($text, '#私はKのコインを選ぶ') !== false) {
 
                 // 種類
                 $battle_type = 'CoinToss';
