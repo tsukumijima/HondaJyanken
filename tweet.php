@@ -491,17 +491,18 @@
                 strpos($text, '#本田にチョキで勝つ') !== false or
                 strpos($text, '#本田にパーで勝つ') !== false) {
 
-                // 本田とじゃんけん2020
-                if (strpos($text, '#本田とじゃんけん2020') !== false) {
-
-                    // 種類
-                    $battle_type = 'Jyanken2020';
-
                 // 本田とじゃんけん(2019)
-                } else {
+                if (strpos($text, '#本田とじゃんけん2020') === false and // #本田とじゃんけん 2020 が含まれていなくて
+                    strpos($text, '#本田とじゃんけん') !== false) { // #本田とじゃんけんが含まれていたら
 
                     // 種類
                     $battle_type = 'Jyanken';
+
+                // 本田とじゃんけん2020
+                } else {
+
+                    // 種類
+                    $battle_type = 'Jyanken2020';
 
                 }
 
