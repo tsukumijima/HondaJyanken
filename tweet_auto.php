@@ -16,7 +16,7 @@
 		$connection = new TwitterOAuth($config['CONSUMER_KEY'], $config['CONSUMER_SECRET'], $config['OAUTH_TOKEN'], $config['OAUTH_TOKEN_SECRET']);
 
 		// 天気予報APIを叩く
-		$weather = json_decode(file_get_contents('http://weather.livedoor.com/forecast/webservice/json/v1?city=130010'), true);
+		$weather = json_decode(file_get_contents('https://weather.tsukumijima.net/api/forecast/city/130010'), true);
 
 		// パターンごとに
 		if (isset($weather['forecasts'][0]['telop'])) {
