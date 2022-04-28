@@ -22,7 +22,7 @@
 		if (isset($weather['forecasts'][0]['telop'])) {
 
 			switch ($weather['forecasts'][0]['telop']){
-				
+
 				case '晴れ':
 					$telop = '☀️晴れ';
 				break;

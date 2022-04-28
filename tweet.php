@@ -10,7 +10,7 @@
     require_once (dirname(__FILE__).'/config.php');
 
     $honda = new Honda($config);
-    
+
     class Honda {
 
         // 設定
@@ -48,22 +48,22 @@
 
 
             // 現在の実行時刻のタイムスタンプ
-            $timestamp = microtime(true); 
+            $timestamp = microtime(true);
 
             // 何分前までのツイートを取得するか
             if (file_exists(dirname(__FILE__).'/'.$this->config['time_log'])){
-                
+
                 // 前回の実行時刻のタイムスタンプ
                 $timestamp_last = file_get_contents(dirname(__FILE__).'/'.$this->config['time_log']);
                 // 実行間隔
                 $interval = $timestamp - $timestamp_last; // 秒
 
             } else {
-                
+
                 // 1時間前に実行したと仮定
                 $interval = 3600; // 秒
                 $timestamp_last = $timestamp - $interval;
-                
+
             }
 
             // 実行時間を記録する
@@ -83,7 +83,7 @@
 
             // アクセストークンがない場合
             if (!isset($this->config['OAUTH_TOKEN']) or !isset($this->config['OAUTH_TOKEN_SECRET'])){
-                
+
                 echo '    エラー: ツイートする場合はアクセストークンを設定してください。'."\n\n";
                 echo '  -------------------------------------------------------'."\n\n";
                 exit(1); // 終了
@@ -96,9 +96,9 @@
 
             // 毎時0分ならフォローバック
             if (date('i') == '00') {
-                
+
                 echo '    自動フォローバックを開始します。'."\n\n";
-                
+
                 // フォローバックを実行
                 $this->followback();
 
@@ -109,7 +109,7 @@
 
             // リプライを取得
             $tweets = $this->connection->get('statuses/mentions_timeline', array('count' => $this->config['tweet_acquisition'], 'tweet_mode' => 'extended'));
-            
+
             echo '    直近 '.(count($tweets)).' 件のツイートを取得しました。'."\n\n";
             echo '    リプライへの返信を開始します。'."\n\n";
             echo '  -------------------------------------------------------'."\n\n";
@@ -171,19 +171,19 @@
 
                     }
 
-    
+
                 } else if ($tweet->user->screen_name === $this->config['screen_name']) {
-    
+
                     echo '      自分からのツイートのため、リプライをスキップします。'."\n\n";
-    
+
                 } else if ($tweet->user->screen_name === 'pepsi_jpn') {
-    
+
                     echo '      Pepsi 公式からのツイートのため、リプライをスキップします。'."\n\n";
 
                 } else if ($timestamp_tweet < $timestamp_last) {
 
                     echo '      前回の実行時刻よりも前にツイートされているため、リプライをスキップします。'."\n\n";
-    
+
                 }
 
             }
@@ -203,7 +203,7 @@
             // #本田大好き
             // 同時に指定されていたときはより勝率の高い方を設定するためにこの順番にしている
             if (strpos($text, '#本田大好き') !== false){
-            
+
                 // 勝率を 70% に設定
                 $this->percentage = self::HONDA_LOVE;
 
@@ -212,7 +212,7 @@
 
                 // 勝率を 40% に設定
                 $this->percentage = self::HONDA_KIND;
-            
+
             } else {
 
                 // デフォルト設定を使用
@@ -230,7 +230,7 @@
 
             // フォロワーの ID を取得
             $followers = $this->connection->get('followers/ids', array('cursor' => -1));
-            
+
             // フォロー中の ID を取得
             $friends = $this->connection->get('friends/ids', array('cursor' => -1));
 
@@ -577,7 +577,7 @@
 
                 // #私は本田のBを引く
                 } else if (strpos($text, '#私は本田のBを引く') !== false) {
-                    
+
                     $command = '#私は本田のBを引く'; // コマンド
 
                     $result = 'CardB'; // 選択: Bのカード
@@ -594,7 +594,7 @@
 
                 // #私はHのコインを選ぶ
                 if (strpos($text, '#私はHのコインを選ぶ') !== false) {
-                    
+
                     $command = '#私はHのコインを選ぶ'; // コマンド
 
                     // YOU LOSE
@@ -611,7 +611,7 @@
 
                 // #私はKのコインを選ぶ
                 } else if (strpos($text, '#私はKのコインを選ぶ') !== false) {
-                    
+
                     $command = '#私はKのコインを選ぶ'; // コマンド
 
                     // YOU LOSE
@@ -627,7 +627,7 @@
                     }
                 }
             }
-            
+
             // どれにも当てはまらなかったらヘルプを送信する
             if (!isset($result)) {
 
@@ -656,7 +656,7 @@
 
                 // 動画
                 $tweet_video = $assets[$battle_type]['YOU_LOSE'][$result][$random]['video'];
-                
+
                 // ツイート本文（ %speech% を置換する）
                 $tweet_text = str_replace('%speech%',
                     $assets[$battle_type]['YOU_LOSE'][$result][$random]['speech'],
@@ -669,14 +669,14 @@
                     $tweet_text = str_replace('YOU LOSE!!!!', 'まだまだ甘いです。YOU LOSE!!!!', $tweet_text);
 
                 }
-                
+
 				echo '      '.$command.' (勝率: '.$this->percentage.'%): 残念、本田圭佑の勝利！'."\n\n";
 
             } else if ($this->battle === self::YOU_WIN) {
 
                 // 動画
                 $tweet_video = $assets[$battle_type]['YOU_WIN'][$result]['video'];
-                
+
                 // ツイート本文
                 $tweet_text = $assets[$battle_type]['YOU_WIN']['Text'];
 
@@ -690,7 +690,7 @@
 				echo '      '.$command.' (勝率: '.$this->percentage.'%): お見事！あなたの勝利！'."\n\n";
 
             }
-            
+
             // 動画とツイートを返す
             return array(
                 'video' => $tweet_video,
@@ -702,7 +702,7 @@
 
         /**
          * 指定されたIDのツイートにリプライを送信する
-         * 
+         *
          * @param int $tweet_id リプライを行うツイートのID
          * @param string $screen_name スクリーンネーム (ID)
          * @param string $text ツイート本文
@@ -715,7 +715,7 @@
             $send['status'] = '@'.$screen_name."\n".$text;
             $send['in_reply_to_status_id'] = $tweet_id;
             if ($upload !== null) $send['media_ids'] = implode(',', [$upload->media_id_string]);
-            
+
             // リプライを送信
             $result = $this->connection->post('statuses/update', $send);
 
@@ -732,7 +732,7 @@
 
         /**
          * 指定されたIDのツイートに勝負の結果を送信する
-         * 
+         *
          * @param int $tweet_id リプライを行うツイートのID
          * @param string $screen_name スクリーンネーム (ID)
          * @param string $text ツイート本文
@@ -758,7 +758,7 @@
 
         /**
          * 指定されたIDのツイートにヘルプを送信する
-         * 
+         *
          * @param int $tweet_id リプライを行うツイートのID
          * @param string $screen_name スクリーンネーム (ID)
          */
@@ -766,11 +766,11 @@
 
             // ヘルプの内容（配列）
             $helps = array(
-                
+
                 'ヘルプを送信しときます。'."\n".
                 '#本田とじゃんけん / #本田とじゃんけん2020 / #本田とカードバトル / #本田とコイントス を再現する非公式 Bot です。'."\n\n".
                 'それぞれ、「@HondaJyanken #本田とじゃんけん #本田に(グー or チョキ or パー)で勝つ」、(続く)'."\n",
-                
+
                 '「@HondaJyanken #本田とじゃんけん2020 #本田に(グー or チョキ or パー)で勝つ」、'."\n".
                 '「@HondaJyanken #本田とカードバトル #私は本田の(A or B)を引く」、'."\n".
                 '「@HondaJyanken #本田とコイントス #私は(H or K)のコインを選ぶ」とツイートしとくと結果が (続く)'."\n",
@@ -782,7 +782,7 @@
                 'ほな、(勝利) いただきます😁'."\n",
 
             );
-            
+
             foreach ($helps as $help) {
 
                 // ツイートを送信
