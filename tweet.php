@@ -744,8 +744,9 @@
             $upload = $this->connection->upload('media/upload', array('media' => $video, 'media_type' => 'video/mp4', 'media_category' => 'tweet_video'), true);
 
             // 動画が使えるようになるまで数秒待つ
-            // これをやらないと (code: 324): Not valid video が発生する
-            sleep(3);
+            // これをやらないと (code: 324): Not valid video または Pre-processing has not been done for this video が発生する
+            // 念のため多めに待っておく
+            sleep(10);
 
             // リプライするツイートをファボる
             $this->connection->post('favorites/create', array('id' => $tweet_id));
