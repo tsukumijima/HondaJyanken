@@ -1,6 +1,7 @@
 # Ignore Files
 #---------------------------
 config.php
+!twitteroauth/src/Config.php
 exec.log
 exec_auto.log
 time.log
