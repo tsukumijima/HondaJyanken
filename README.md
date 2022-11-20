@@ -1,21 +1,17 @@
 # HondaJyanken
 
-本田とじゃんけんBot (@HondaJyanken) 用のプログラム一式
-
-この説明書は Linux 環境にて /root/HondaJyanken/ に配置することを前提とする  
-他のフォルダに入れた場合や Windows 環境で動かす場合は適宜読み替えること  
-Bot 制作に役立てるなりご自由に
+本田とじゃんけんBot (@HondaJyanken) 用のプログラム一式。
 
 ## 内容物
 
-- README.md … この説明書
+- README.md … この README
 - config.default.php … 設定ファイル
-  - 手動で config.php にコピー後 UTF-8・LF で保存できるエディタで編集する
+  - 手動で config.php にコピー後、UTF-8・LF で保存できるエディタで編集する
 - 334.php … 334用
 - tweet.php … Bot 本体
   - このファイルを Cron で定期的に叩くことで Bot を実行する
 - tweet_auto.php … 自動ツイート用
-  - 今日の東京の天気と画像を呟けるようにしてある
+  - 今日の東京の天気と画像をつぶやけるようにしてある
 - tweet_cmd.php … コマンドからツイートを投稿する用
   - `php /root/HondaJyanken/tweet_auto.php "おはようございます"` とコマンドを実行するとツイートされる
 - twitteroauth/ … Twitter API 操作用ライブラリ
